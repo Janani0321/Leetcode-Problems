@@ -1,0 +1,30 @@
+leetcode 207 course schedule
+
+from collections import deque
+class Solution(object):
+    def canFinish(self, numCourses, prerequisites):
+        """
+        :type numCourses: int
+        :type prerequisites: List[List[int]]
+        :rtype: bool
+        """
+        graph={i:[] for i in range(numCourses)}
+        indeg={i:0 for i in range(numCourses)}
+        
+        for a, b in prerequisites:
+            graph[b].append(a)
+            indeg[a]+=1
+
+        q = deque([i for i in range(numCourses) if indeg[i]==0])
+        count=0
+
+        while q:
+            course=q.popleft()
+            count+=1
+            
+            for next_course in graph[course]:
+                indeg[next_course]-=1
+                if indeg[next_course]==0:
+                    q.append(next_course)
+
+        return count==numCourses

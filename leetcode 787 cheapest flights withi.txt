@@ -1,0 +1,13 @@
+leetcode 787 cheapest flights within K stops
+
+class Solution(object):
+    def findCheapestPrice(self, n, flights, src, dst, k):
+        prices=[float('inf')]*n
+        prices[src]=0
+        for _ in range(k+1):
+            temp=prices[:]
+            for u,v,p in flights:
+                if prices[u]!=float('inf') and prices[u]+p<temp[v]:
+                    temp[v]=prices[u]+p
+            prices=temp
+        return prices[dst] if prices[dst]!=float('inf') else -1

@@ -1,0 +1,7 @@
+leetcode 215 Kth largest element in an array
+
+class Solution(object):
+    def findKthLargest(self, nums, k):
+        nums.sort()
+        res=nums[-k]
+        return res

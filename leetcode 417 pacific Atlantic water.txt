@@ -1,0 +1,32 @@
+leetcode 417 pacific Atlantic waterflow
+
+class Solution(object):
+    def pacificAtlantic(self, heights):
+        if not heights or not heights[0]:
+            return []
+        m, n = len(heights), len(heights[0])
+        directions = [(0,1), (0,-1), (1,0), (-1,0)]
+        result = []
+        for i in range(m):
+            for j in range(n):
+                pacific, atlantic = False, False
+                visited = set()
+                stack = [(i, j)]
+                while stack:
+                    x, y = stack.pop()
+                    if (x, y) in visited:
+                        continue
+                    visited.add((x, y))
+                    if x == 0 or y == 0:
+                        pacific = True
+                    if x == m - 1 or y == n - 1:
+                        atlantic = True
+                    if pacific and atlantic:
+                        result.append([i, j])
+                        break
+                    for dx, dy in directions:
+                        nx, ny = x + dx, y + dy
+                        if 0 <= nx < m and 0 <= ny < n and heights[nx][ny] <= heights[x][y]:
+                            stack.append((nx, ny))
+        return result
+        

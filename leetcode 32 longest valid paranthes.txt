@@ -1,0 +1,20 @@
+leetcode 32 longest valid paranthesis
+
+class Solution(object):
+    def longestValidParentheses(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        res=0
+        st=[-1]
+        for i in range(len(s)):
+            if s[i]=="(":
+                st.append(i)
+            else:
+                st.pop()
+                if len(st)==0:
+                    st.append(i)
+                else:
+                    res=max(res,i-st[-1])
+        return res

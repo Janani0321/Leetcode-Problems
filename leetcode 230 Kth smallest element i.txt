@@ -1,0 +1,14 @@
+leetcode 230 Kth smallest element in a BST 
+
+class Solution(object):
+    def kthSmallest(self, root, k):
+        st=[]
+        while True:
+            while root:
+                st.append(root)
+                root = root.left
+            root = st.pop()
+            k -= 1
+            if k == 0:
+                return root.val
+            root = root.right
