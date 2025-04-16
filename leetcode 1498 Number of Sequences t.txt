@@ -1,4 +1,4 @@
-leetcode 1498 Number of Sequences that satisfy the given sum condition
+#leetcode 1498 Number of Sequences that satisfy the given sum condition
 
 class Solution(object):
     def numSubseq(self, nums, target):
